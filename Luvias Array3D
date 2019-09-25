@@ -1,0 +1,25 @@
+import xlrd
+
+from Array3D import Array3D
+lluvias=Array3D(35,32,12)
+
+for anio in range(1985,2019,1):
+
+    archivo=xlrd.open_workbook(filename="C:\\Users\\josuecristian\\Desktop\Precipitacion\\"+str(anio)+'Precip.xls')
+
+    hoja=archivo.sheet_by_index(0)
+    
+    for r in range(2,34):
+        
+         for c in range(1,15):
+            value = hoja.cell_value(r,c)
+            lluvias.set_item(anio-1985, r-2, c-1, value)
+
+        
+año= int(input("¿Que año(1985-2019)?:"))
+estado= int(input("¿Que estados(1-32)?:"))
+mes= int(input("¿Que mes(1-12)?:"))
+       
+promedio=lluvias.get_item(año, estado, mes)
+
+print("El promedio de centímetros cubícos de lluvia fué de: ", promedio)
